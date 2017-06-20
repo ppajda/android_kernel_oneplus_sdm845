@@ -61,7 +61,7 @@ struct userfaultfd_ctx {
 
 struct userfaultfd_wait_queue {
 	struct uffd_msg msg;
-	wait_queue_t wq;
+	wait_queue_entry_t wq;
 	struct userfaultfd_ctx *ctx;
 	bool waken;
 };
@@ -71,7 +71,7 @@ struct userfaultfd_wake_range {
 	unsigned long len;
 };
 
-static int userfaultfd_wake_function(wait_queue_t *wq, unsigned mode,
+static int userfaultfd_wake_function(wait_queue_entry_t *wq, unsigned mode,
 				     int wake_flags, void *key)
 {
 	struct userfaultfd_wake_range *range = key;
@@ -530,7 +530,7 @@ wakeup:
 static inline struct userfaultfd_wait_queue *find_userfault(
 	struct userfaultfd_ctx *ctx)
 {
-	wait_queue_t *wq;
+	wait_queue_entry_t *wq;
 	struct userfaultfd_wait_queue *uwq;
 
 	VM_BUG_ON(!spin_is_locked(&ctx->fault_pending_wqh.lock));
@@ -1281,7 +1281,7 @@ static long userfaultfd_ioctl(struct file *file, unsigned cmd,
 static void userfaultfd_show_fdinfo(struct seq_file *m, struct file *f)
 {
 	struct userfaultfd_ctx *ctx = f->private_data;
-	wait_queue_t *wq;
+	wait_queue_entry_t *wq;
 	struct userfaultfd_wait_queue *uwq;
 	unsigned long pending = 0, total = 0;
 
