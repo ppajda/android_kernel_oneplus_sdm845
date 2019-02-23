@@ -15939,44 +15939,6 @@ static void hdd_qdf_deinit(void)
 	hdd_qdf_print_deinit();
 }
 
-/**
- * hdd_module_init() - Module init helper
- *
- * Module init helper function used by both module and static driver.
- *
- * Return: 0 for success, errno on failure
- */
-static int hdd_module_init(void)
-{
-	int ret;
-
-	ret = wlan_hdd_state_ctrl_param_create();
-	if (ret)
-		pr_err("wlan_hdd_state_create:%x\n", ret);
-
-	return ret;
-}
-
-/**
- * hdd_module_exit() - Exit function
- *
- * This is the driver exit point (invoked when module is unloaded using rmmod)
- *
- * Return: None
- */
-static void __exit hdd_module_exit(void)
-{
-	hdd_driver_unload();
-}
-
-#undef hdd_fln
-
-static int fwpath_changed_handler(const char *kmessage,
-				  const struct kernel_param *kp)
-{
-	return param_set_copystring(kmessage, kp);
-}
-
 #ifdef FEATURE_MONITOR_MODE_SUPPORT
 static bool is_monitor_mode_supported(void)
 {
@@ -16505,7 +16467,8 @@ static void hdd_driver_unload(void)
 static int hdd_module_init(void)
 {
 
-	return ret;
+	int ret;
+
 	ret = wlan_hdd_state_ctrl_param_create();
 	if (ret)
 		pr_err("wlan_hdd_state_create:%x\n", ret);
