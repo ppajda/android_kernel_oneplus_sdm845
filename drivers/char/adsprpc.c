@@ -2940,6 +2940,9 @@ static void fastrpc_glink_notify_rx(void *handle, const void *priv,
 	me->ctxtable[index]->ptr = ptr;
 	spin_unlock_irqrestore(&me->ctxlock, irq_flags);
 
+	me->ctxtable[index]->handle = handle;
+	me->ctxtable[index]->ptr = ptr;
+
 	context_notify_user(me->ctxtable[index], rsp->retval);
 bail:
 	if (err)
