@@ -6070,7 +6070,7 @@ static int fg_gen3_probe(struct platform_device *pdev)
 	device_init_wakeup(chip->dev, true);
 	schedule_delayed_work(&chip->profile_load_work, 0);
 
-	pr_info("FG GEN3 driver probed successfully\n");
+	pr_info("yfb FG GEN3 driver probed successfully\n");
 	return 0;
 exit:
 	fg_cleanup(chip);
