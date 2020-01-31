@@ -4052,7 +4052,7 @@ QDF_STATUS ol_register_peer_recovery_notifier(struct ol_txrx_peer_t *peer)
  */
 void peer_unmap_timer_handler(void *data)
 {
-	ol_txrx_peer_handle peer = (ol_txrx_peer_handle)data;
+	//ol_txrx_peer_handle peer = (ol_txrx_peer_handle)data;
 
 	if (!peer)
 		return;
