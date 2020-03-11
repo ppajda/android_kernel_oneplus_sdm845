@@ -1016,7 +1016,6 @@ int wake_bit_function(struct wait_queue_entry *wq_entry, unsigned mode, int sync
 		(wait)->flags = 0;					\
 	} while (0)
 
-
 extern int bit_wait(struct wait_bit_key *, int);
 extern int bit_wait_io(struct wait_bit_key *, int);
 extern int bit_wait_timeout(struct wait_bit_key *, int);
@@ -1224,5 +1223,6 @@ int wait_on_atomic_t(atomic_t *val, int (*action)(atomic_t *), unsigned mode)
 		return 0;
 	return out_of_line_wait_on_atomic_t(val, action, mode);
 }
+bool try_invoke_on_locked_down_task(struct task_struct *p, bool (*func)(struct task_struct *t, void *arg), void *arg);
 
 #endif /* _LINUX_WAIT_H */
