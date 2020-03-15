@@ -5,6 +5,7 @@
  * Copyright (C) 2020 Paul E. McKenney
  */
 
+#ifdef CONFIG_TASKS_RCU_GENERIC
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -569,3 +570,7 @@ static int __init rcu_spawn_tasks_rude_kthread(void)
 core_initcall(rcu_spawn_tasks_rude_kthread);
 
 #endif /* #ifdef CONFIG_TASKS_RUDE_RCU */
+
+#else /* #ifdef CONFIG_TASKS_RCU_GENERIC */
+static inline void rcu_tasks_bootup_oddness(void) {}
+#endif /* #else #ifdef CONFIG_TASKS_RCU_GENERIC */
