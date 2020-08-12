@@ -2241,6 +2241,8 @@ ccflags-y += -DWLAN_MAX_VDEVS=$(CONFIG_WLAN_MAX_VDEVS)
 
 KBUILD_CPPFLAGS += $(cppflags-y)
 
+EXTRA_CFLAGS += -Wno-unused-function
+
 # Currently, for versions of gcc which support it, the kernel Makefile
 # is disabling the maybe-uninitialized warning.  Re-enable it for the
 # WLAN driver.  Note that we must use ccflags-y here so that it
