@@ -345,8 +345,10 @@ LDLLD		= ld.lld
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
+LLVMNM		= llvm-nm
 STRIP		= $(CROSS_COMPILE)strip
 OBJCOPY		= $(CROSS_COMPILE)objcopy
+LLVMOBJCOPY	= llvm-objcopy
 OBJDUMP		= $(CROSS_COMPILE)objdump
 AWK		= awk
 GENKSYMS	= scripts/genksyms/genksyms
@@ -735,17 +737,25 @@ lto-clang-flags	:= -flto
 endif
 lto-clang-flags += -fvisibility=hidden
 
+# Limit inlining across translation units to reduce binary size
+LD_FLAGS_LTO_CLANG := -mllvm -import-instr-limit=5
+
+KBUILD_LDFLAGS += $(LD_FLAGS_LTO_CLANG)
+KBUILD_LDFLAGS_MODULE += $(LD_FLAGS_LTO_CLANG)
+
+KBUILD_LDFLAGS_MODULE += -T $(srctree)/scripts/module-lto.lds
+
 # allow disabling only clang LTO where needed
 DISABLE_LTO_CLANG := -fno-lto -fvisibility=default
 export DISABLE_LTO_CLANG
 endif
 
 ifdef CONFIG_LTO
-lto-flags	:= $(lto-clang-flags)
-KBUILD_CFLAGS	+= $(lto-flags)
+LTO_CFLAGS	:= $(lto-clang-flags)
+KBUILD_CFLAGS	+= $(LTO_CFLAGS)
 
 DISABLE_LTO	:= $(DISABLE_LTO_CLANG)
-export DISABLE_LTO
+export LTO_CFLAGS DISABLE_LTO
 
 # LDFINAL_vmlinux and LDFLAGS_FINAL_vmlinux can be set to override
 # the linker and flags for vmlinux_link.
@@ -771,12 +781,12 @@ endif
 
 ifdef CONFIG_CFI
 # cfi-flags are re-tested in prepare-compiler-check
-cfi-flags	:= $(cfi-clang-flags)
-KBUILD_CFLAGS	+= $(cfi-flags)
+CFI_CFLAGS	:= $(cfi-clang-flags)
+KBUILD_CFLAGS	+= $(CFI_CFLAGS)
 
 DISABLE_CFI	:= $(DISABLE_CFI_CLANG)
 DISABLE_LTO	+= $(DISABLE_CFI)
-export DISABLE_CFI
+export CFI_CFLAGS DISABLE_CFI
 endif
 
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
@@ -1028,6 +1038,13 @@ endif
 
 ifeq ($(CONFIG_STRIP_ASM_SYMS),y)
 LDFLAGS_vmlinux	+= $(call ld-option, -X,)
+endif
+
+ifeq ($(CONFIG_RELR),y)
+LDFLAGS_vmlinux	+= --pack-dyn-relocs=relr
+OBJCOPY	:= $(LLVMOBJCOPY)
+NM	:= $(LLVMNM)
+export OBJCOPY NM
 endif
 
 # Default kernel image to build when no specific target is given.
