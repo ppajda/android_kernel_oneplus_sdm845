@@ -273,7 +273,7 @@ struct cpufreq_policy *cpufreq_cpu_get(unsigned int cpu)
 	struct cpufreq_policy *policy = NULL;
 	unsigned long flags;
 
-	if (WARN_ON(cpu >= nr_cpu_ids))
+	if (cpu >= nr_cpu_ids)
 		return NULL;
 
 	/* get the cpufreq driver */
@@ -351,9 +351,8 @@ static DEFINE_PER_CPU(unsigned long, max_freq_cpu);
 static DEFINE_PER_CPU(unsigned long, max_freq_scale) = SCHED_CAPACITY_SCALE;
 static DEFINE_PER_CPU(unsigned long, min_freq_scale);
 
-static void
-scale_freq_capacity(const cpumask_t *cpus, unsigned long cur_freq,
-		    unsigned long max_freq)
+void scale_freq_capacity(const cpumask_t *cpus, unsigned long cur_freq,
+			 unsigned long max_freq)
 {
 	unsigned long scale = (cur_freq << SCHED_CAPACITY_SHIFT) / max_freq;
 	int cpu;
@@ -366,6 +365,7 @@ scale_freq_capacity(const cpumask_t *cpus, unsigned long cur_freq,
 	pr_debug("cpus %*pbl cur freq/max freq %lu/%lu kHz freq scale %lu\n",
 		 cpumask_pr_args(cpus), cur_freq, max_freq, scale);
 }
+EXPORT_SYMBOL_GPL(scale_freq_capacity);
 
 unsigned long cpufreq_scale_freq_capacity(struct sched_domain *sd, int cpu)
 {
