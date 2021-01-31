@@ -232,6 +232,7 @@ static void cpu_idle_loop(void)
 
 			local_irq_disable();
 			arch_cpu_idle_enter();
+			rcu_nocb_flush_deferred_wakeup();
 
 			/*
 			 * In poll mode we reenable interrupts and spin.
