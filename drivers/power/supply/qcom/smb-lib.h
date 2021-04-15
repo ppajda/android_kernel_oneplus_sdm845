@@ -501,6 +501,7 @@ struct smb_charger {
 	bool			disable_stat_sw_override;
 	bool			in_chg_lock;
 	bool			fcc_stepper_enable;
+	bool			ufp_only_mode;
 
 	/* workaround flag */
 	u32			wa_flags;
@@ -736,6 +737,7 @@ int smblib_toggle_stat(struct smb_charger *chg, int reset);
 int smblib_get_prop_batt_temp(struct smb_charger *chg,
 			      union power_supply_propval *val);
 
+int smblib_force_ufp(struct smb_charger *chg);
 
 int smblib_init(struct smb_charger *chg);
 int smblib_deinit(struct smb_charger *chg);

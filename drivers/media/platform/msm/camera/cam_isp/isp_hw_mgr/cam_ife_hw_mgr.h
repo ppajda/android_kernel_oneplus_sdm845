@@ -1,4 +1,4 @@
-/* Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017-2019, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -123,6 +123,8 @@ struct cam_ife_hw_mgr_debug {
  *                          context
  * @is_rdi_only_context     flag to specify the context has only rdi resource
  * @config_done_complete    indicator for configuration complete
+ * @dual_ife_irq_mismatch_cnt   irq mismatch count value per core, used for
+ *                              dual VFE
  */
 struct cam_ife_hw_mgr_ctx {
 	struct list_head                list;
@@ -156,6 +158,7 @@ struct cam_ife_hw_mgr_ctx {
 	atomic_t                        overflow_pending;
 	uint32_t                        is_rdi_only_context;
 	struct completion               config_done_complete;
+	uint32_t                        dual_ife_irq_mismatch_cnt;
 };
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015-2019, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2015-2020, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -32,6 +32,7 @@
 #include "configfs.h"
 
 #define GSI_RMNET_CTRL_NAME "rmnet_ctrl"
+#define GSI_RMNET_V2X_CTRL_NAME "rmnet_v2x_ctrl"
 #define GSI_MBIM_CTRL_NAME "android_mbim"
 #define GSI_DPL_CTRL_NAME "dpl_ctrl"
 #define ETHER_RMNET_CTRL_NAME "rmnet_ctrl0"
@@ -42,7 +43,7 @@
 #define GSI_MAX_CTRL_PKT_SIZE 8192
 #define GSI_CTRL_DTR (1 << 0)
 
-#define GSI_NUM_IN_RNDIS_BUFFERS 50
+#define GSI_NUM_IN_RNDIS_RMNET_ECM_BUFFERS 50
 #define GSI_NUM_IN_BUFFERS 15
 #define GSI_IN_BUFF_SIZE 2048
 #define GSI_NUM_OUT_BUFFERS 14
@@ -125,6 +126,7 @@ enum usb_prot_id {
 	USB_PROT_RMNET_IPA,
 	USB_PROT_MBIM_IPA,
 	USB_PROT_DIAG_IPA,
+	USB_PROT_RMNET_V2X_IPA,
 
 	/* non-accelerated */
 	USB_PROT_RMNET_ETHER,
@@ -339,6 +341,8 @@ static int name_to_prot_id(const char *name)
 		return USB_PROT_MBIM_IPA;
 	if (!strncasecmp(name, "dpl", MAX_INST_NAME_LEN))
 		return USB_PROT_DIAG_IPA;
+	if (!strncasecmp(name, "rmnet.v2x", MAX_INST_NAME_LEN))
+		return USB_PROT_RMNET_V2X_IPA;
 	if (!strncasecmp(name, "rmnet.ether", MAX_INST_NAME_LEN))
 		return USB_PROT_RMNET_ETHER;
 	if (!strncasecmp(name, "dpl.ether", MAX_INST_NAME_LEN))

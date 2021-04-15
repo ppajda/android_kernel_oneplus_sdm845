@@ -1,4 +1,4 @@
-/* Copyright (c) 2015, 2017-2018, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2015, 2017-2020, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -953,6 +953,11 @@ int mhi_dev_mmio_init(struct mhi_dev *dev)
 	if (rc)
 		return rc;
 
+	rc = mhi_dev_mmio_masked_read(dev, MHICFG, MHICFG_NHWER_MASK,
+				MHICFG_NHWER_SHIFT, &dev->cfg.hw_event_rings);
+	if (rc)
+		return rc;
+
 	rc = mhi_dev_mmio_read(dev, CHDBOFF, &dev->cfg.chdb_offset);
 	if (rc)
 		return rc;
@@ -977,16 +982,22 @@ EXPORT_SYMBOL(mhi_dev_mmio_init);
 
 int mhi_dev_update_ner(struct mhi_dev *dev)
 {
-	int rc = 0;
+	int rc = 0, mhi_cfg = 0;
 
-	rc = mhi_dev_mmio_masked_read(dev, MHICFG, MHICFG_NER_MASK,
-				  MHICFG_NER_SHIFT, &dev->cfg.event_rings);
-	if (rc) {
-		pr_err("Error update NER\n");
+	if (WARN_ON(!dev))
+		return -EINVAL;
+
+	rc = mhi_dev_mmio_read(dev, MHICFG, &mhi_cfg);
+	if (rc)
 		return rc;
-	}
 
-	pr_debug("NER in HW :%d\n", dev->cfg.event_rings);
+	pr_debug("MHICFG: 0x%x", mhi_cfg);
+
+	dev->cfg.event_rings =
+		(mhi_cfg & MHICFG_NER_MASK) >> MHICFG_NER_SHIFT;
+	dev->cfg.hw_event_rings =
+		(mhi_cfg & MHICFG_NHWER_MASK) >> MHICFG_NHWER_SHIFT;
+
 	return 0;
 }
 EXPORT_SYMBOL(mhi_dev_update_ner);

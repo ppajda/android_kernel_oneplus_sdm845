@@ -629,7 +629,6 @@ static void add_profiling_buffer(struct kgsl_device *device,
 		cmdobj->profiling_buffer_gpuaddr =
 			entry->memdesc.gpuaddr + offset;
 	}
-
 	cmdobj->profiling_buf_entry = entry;
 }
 

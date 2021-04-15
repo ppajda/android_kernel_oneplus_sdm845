@@ -1,4 +1,4 @@
-/* Copyright (c) 2015-2019, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2015-2020, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1457,7 +1457,8 @@ static ssize_t dcc_sram_read(struct file *file, char __user *data,
 	if (drvdata->ram_size <= *ppos)
 		return 0;
 
-	if ((*ppos + len) > drvdata->ram_size)
+	if ((*ppos + len) < len
+		|| (*ppos + len) > drvdata->ram_size)
 		len = (drvdata->ram_size - *ppos);
 
 	buf = kzalloc(len, GFP_KERNEL);

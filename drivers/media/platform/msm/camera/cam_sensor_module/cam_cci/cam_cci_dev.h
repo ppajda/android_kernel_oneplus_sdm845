@@ -26,6 +26,7 @@
 #include <linux/timer.h>
 #include <linux/kernel.h>
 #include <linux/platform_device.h>
+#include <linux/mutex.h>
 #include <media/cam_sensor.h>
 #include <media/v4l2-event.h>
 #include <media/v4l2-ioctl.h>
@@ -196,6 +197,8 @@ enum cam_cci_state_t {
  * @cci_wait_sync_cfg: CCI sync config
  * @cycles_per_us: Cycles per micro sec
  * @payload_size: CCI packet payload size
+ * @init_mutex: Mutex for maintaining refcount for attached
+ *              devices to cci during init/deinit.
  */
 struct cci_device {
 	struct v4l2_subdev subdev;
@@ -221,6 +224,7 @@ struct cci_device {
 	char device_name[20];
 	uint32_t cpas_handle;
 	struct mutex ref_count_mutex;
+	struct mutex init_mutex;
 };
 
 enum cam_cci_i2c_cmd_type {

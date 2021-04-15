@@ -233,6 +233,7 @@ static void kgsl_iommu_add_global(struct kgsl_mmu *mmu,
 		return;
 
 	if (WARN_ON(global_pt_count >= GLOBAL_PT_ENTRIES))
+
 	return;
 
 	if (WARN_ON(size > KGSL_IOMMU_GLOBAL_MEM_SIZE))

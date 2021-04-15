@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2019, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2008-2020, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -202,7 +202,7 @@ static void diag_send_log_mask_update(uint8_t peripheral, int equip_id)
 		}
 
 		memcpy(buf, &ctrl_pkt, header_len);
-		if (mask_size > 0 && mask_size <= LOG_MASK_SIZE)
+		if (mask_size > 0)
 			memcpy(buf + header_len, mask->ptr, mask_size);
 		mutex_unlock(&mask->lock);
 
@@ -304,7 +304,7 @@ static void diag_send_event_mask_update(uint8_t peripheral)
 				buf = temp;
 			}
 		}
-		if (num_bytes > 0 && num_bytes < mask_info->mask_len)
+		if (num_bytes > 0)
 			memcpy(buf + sizeof(header), mask_info->ptr, num_bytes);
 		else {
 			pr_err("diag: num_bytes(%d) is not satisfying length condition\n",
@@ -896,7 +896,8 @@ static int diag_cmd_set_msg_mask(unsigned char *src_buf, int src_len,
 		goto end;
 	if (mask_size + write_len > dest_len)
 		mask_size = dest_len - write_len;
-	memcpy(dest_buf + write_len, src_buf + header_len, mask_size);
+	if (mask_size && src_len >= header_len + mask_size)
+		memcpy(dest_buf + write_len, src_buf + header_len, mask_size);
 	write_len += mask_size;
 	for (i = 0; i < NUM_MD_SESSIONS; i++) {
 		if (i == APPS_DATA)
@@ -1195,7 +1196,7 @@ static int diag_cmd_get_log_mask(unsigned char *src_buf, int src_len,
 	int rsp_header_len = sizeof(struct diag_log_config_rsp_t);
 	uint32_t mask_size = 0;
 	struct diag_log_mask_t *log_item = NULL;
-	struct diag_log_config_req_t *req;
+	struct diag_log_config_get_req_t *req;
 	struct diag_log_config_rsp_t rsp;
 	struct diag_mask_info *mask_info = NULL;
 	struct diag_md_session_t *info = NULL;
@@ -1205,7 +1206,7 @@ static int diag_cmd_get_log_mask(unsigned char *src_buf, int src_len,
 
 	mask_info = (!info) ? &log_mask : info->log_mask;
 	if (!src_buf || !dest_buf || dest_len <= 0 || !mask_info ||
-		src_len < sizeof(struct diag_log_config_req_t)) {
+		src_len < sizeof(struct diag_log_config_get_req_t)) {
 		pr_err("diag: Invalid input in %s, src_buf: %pK, src_len: %d, dest_buf: %pK, dest_len: %d, mask_info: %pK\n",
 		       __func__, src_buf, src_len, dest_buf, dest_len,
 		       mask_info);
@@ -1224,7 +1225,7 @@ static int diag_cmd_get_log_mask(unsigned char *src_buf, int src_len,
 		return 0;
 	}
 
-	req = (struct diag_log_config_req_t *)src_buf;
+	req = (struct diag_log_config_get_req_t *)src_buf;
 	read_len += req_header_len;
 
 	rsp.cmd_code = DIAG_CMD_LOG_CONFIG;
