@@ -23,6 +23,7 @@
 #include <linux/bio.h>
 #include <linux/blkdev.h>
 #include <linux/quotaops.h>
+#include <linux/list.h>
 #include <crypto/hash.h>
 #include <linux/overflow.h>
 

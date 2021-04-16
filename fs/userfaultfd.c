@@ -508,8 +508,6 @@ static int userfaultfd_release(struct inode *inode, struct file *file)
 		vma->vm_userfaultfd_ctx = NULL_VM_UFFD_CTX;
 		vm_write_end(vma);
 	}
-	up_write(&mm->mmap_sem);
-	mmput(mm);
 wakeup:
 	/*
 	 * After no new page faults can wait on this fault_*wqh, flush
@@ -811,7 +809,6 @@ static int userfaultfd_register(struct userfaultfd_ctx *ctx,
 	down_write(&mm->mmap_sem);
 	if (!mmget_still_valid(mm))
 		goto out_unlock;
-
 	vma = find_vma_prev(mm, start, &prev);
 	if (!vma)
 		goto out_unlock;
@@ -975,7 +972,6 @@ static int userfaultfd_unregister(struct userfaultfd_ctx *ctx,
 	down_write(&mm->mmap_sem);
 	if (!mmget_still_valid(mm))
 		goto out_unlock;
-
 	vma = find_vma_prev(mm, start, &prev);
 	if (!vma)
 		goto out_unlock;
