@@ -51,7 +51,7 @@ do {									\
 	: "=&r" (ret), "=&r" (oldval), "+Q" (*uaddr), "=&r" (tmp),	\
 	  "+r" (loops)							\
 	: "r" (oparg), "Ir" (-EFAULT), "Ir" (-EAGAIN)			\
-	: "memory");						\
+	: "memory");							\
 	uaccess_disable();						\
 } while (0)
 
