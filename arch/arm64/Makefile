@@ -133,21 +133,11 @@ endif
 
 # SDM845 Optimization
 ifeq ($(cc-name),clang)
-KBUILD_CFLAGS	+=	$(call cc-option,-mcpu=cortex-a55,) \
-					$(call cc-option,-march=armv8.2-a,) \
-					$(call cc-option,-mtune=cortex-a55,)
-
-KBUILD_AFLAGS	+=	$(call cc-option,-mcpu=cortex-a55,) \
-					$(call cc-option,-march=armv8.2-a,) \
-					$(call cc-option,-mtune=cortex-a55,)
-else
-KBUILD_CFLAGS	+=	$(call cc-option,-mcpu=cortex-a75.cortex-a55,) \
-					$(call cc-option,-march=armv8.2-a,) \
-					$(call cc-option,-mtune=cortex-a75.cortex-a55,)
-
-KBUILD_AFLAGS	+=	$(call cc-option,-mcpu=cortex-a75.cortex-a55,) \
-					$(call cc-option,-march=armv8.2-a,) \
-					$(call cc-option,-mtune=cortex-a75.cortex-a55,)
+KBUILD_CFLAGS	+=	$(call cc-option,-mcpu=cortex-a75+crypto+crc+nodotprod,)
+KBUILD_AFLAGS	+=	$(call cc-option,-mcpu=cortex-a75+crypto+crc+nodotprod,)
+ifeq ($(CONFIG_LD_LLD), y)
+KBUILD_LDFLAGS  +=	$(call cc-option,-mllvm -cortex-a75+crypto+crc+nodotprod,)
+endif
 endif
 
 CHECKFLAGS	+= -D__aarch64__
