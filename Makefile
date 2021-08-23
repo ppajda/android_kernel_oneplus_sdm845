@@ -802,7 +802,7 @@ KBUILD_CFLAGS	+= $(call cc-disable-warning,maybe-uninitialized,)
 else
 ifeq ($(cc-name),clang)
 KBUILD_CFLAGS   += -O3
-KBUILD_CFLAGS	+= -mcpu=cortex-a55 -mtune=cortex-a55
+KBUILD_CFLAGS	+= -mcpu=cortex-a75+crypto+crc+nodotprod
 ifdef CONFIG_POLLY_CLANG
 KBUILD_CFLAGS	+= -mllvm -polly \
 		   -mllvm -polly-run-dce \
