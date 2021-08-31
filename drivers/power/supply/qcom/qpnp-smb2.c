@@ -1484,16 +1484,6 @@ static int smb2_batt_set_prop(struct power_supply *psy,
 			op_set_fast_chg_allow(chg, false);
 		}
 		chg->chg_disabled = (bool)val->intval;
-		pr_info("user set disable chg %d\n", val->intval);
-		break;
-	case POWER_SUPPLY_PROP_OP_DISABLE_CHARGE:
-		vote(chg->chg_disable_votable, FORCE_RECHARGE_VOTER,
-					(bool)val->intval, 0);
-		if (val->intval) {
-			switch_mode_to_normal();
-			op_set_fast_chg_allow(chg, false);
-		}
-		chg->chg_disabled = (bool)val->intval;
 		pr_debug("user set disable chg %d\n", val->intval);
 		break;
 	case POWER_SUPPLY_PROP_CHARGE_NOW:
