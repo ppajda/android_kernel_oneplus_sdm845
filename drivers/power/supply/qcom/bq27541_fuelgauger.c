@@ -96,7 +96,6 @@
 #define BQ27411_REG_FCC                 0xE
 #define BQ27411_REG_OVER_TEMP           0x40
 #define BQ27411_REG_GET_OVER_TEMP_EN    0x0002
-#define BQ27411_REG_FCC                 0xE
 
 #define CONTROL_CMD                 0x00
 #define CONTROL_STATUS              0x00
