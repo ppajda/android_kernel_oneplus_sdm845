@@ -3073,7 +3073,6 @@ static int smb2_probe(struct platform_device *pdev)
 	chg->probe_done = true;
 	request_vbus_ctrl_gpio(chg);
 	request_plug_irq(chg);
-	requset_vbus_ctrl_gpio(chg);
 	pr_debug("QPNP SMB2 probed successfully usb:present=%d type=%d batt:present = %d health = %d charge = %d\n",
 		usb_present, chg->real_charger_type,
 		batt_present, batt_health, batt_charge_type);
