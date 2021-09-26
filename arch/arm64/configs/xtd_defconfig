@@ -3029,7 +3029,6 @@ CONFIG_MEDIA_SUBDRV_AUTOSELECT=y
 # Sensors used on soc_camera driver
 #
 # CONFIG_MEDIA_TUNER is not set
-# CONFIG_MEDIA_TUNER is not set
 #
 # Multistandard (satellite) frontends
 #
