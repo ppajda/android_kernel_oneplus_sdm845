@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.281 Kernel Configuration
+# Linux/arm64 4.9.287 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -261,6 +261,7 @@ CONFIG_THIN_ARCHIVES=y
 CONFIG_LD_LLD=y
 CONFIG_LTO=y
 CONFIG_ARCH_SUPPORTS_LTO_CLANG=y
+CONFIG_ARCH_SUPPORTS_THINLTO=y
 # CONFIG_THINLTO is not set
 # CONFIG_LTO_NONE is not set
 CONFIG_LTO_CLANG=y
@@ -2921,7 +2922,7 @@ CONFIG_MEDIA_SUPPORT=y
 #
 CONFIG_MEDIA_CAMERA_SUPPORT=y
 # CONFIG_MEDIA_ANALOG_TV_SUPPORT is not set
-CONFIG_MEDIA_DIGITAL_TV_SUPPORT=y
+# CONFIG_MEDIA_DIGITAL_TV_SUPPORT is not set
 # CONFIG_MEDIA_RADIO_SUPPORT is not set
 # CONFIG_MEDIA_SDR_SUPPORT is not set
 # CONFIG_MEDIA_RC_SUPPORT is not set
@@ -2934,11 +2935,7 @@ CONFIG_VIDEO_V4L2=y
 CONFIG_VIDEO_FIXED_MINOR_RANGES=y
 CONFIG_V4L2_MEM2MEM_DEV=y
 CONFIG_VIDEOBUF2_CORE=y
-CONFIG_DVB_CORE=y
-CONFIG_DVB_NET=y
 # CONFIG_TTPCI_EEPROM is not set
-CONFIG_DVB_MAX_ADAPTERS=8
-# CONFIG_DVB_DYNAMIC_MINORS is not set
 
 #
 # Media drivers
@@ -2962,12 +2959,10 @@ CONFIG_MSM_VIDC_V4L2=y
 CONFIG_MSM_VIDC_GOVERNORS=y
 CONFIG_MSM_SDE_ROTATOR=y
 # CONFIG_MSM_SDE_ROTATOR_EVTLOG_DEBUG is not set
-# CONFIG_DVB_MPQ is not set
 CONFIG_TSPP=y
 # CONFIG_ADSP_SHMEM is not set
 # CONFIG_V4L_MEM2MEM_DRIVERS is not set
 # CONFIG_V4L_TEST_DRIVERS is not set
-# CONFIG_DVB_PLATFORM_DRIVERS is not set
 
 #
 # Qualcomm Technologies, Inc. MSM Camera And Video
@@ -2983,93 +2978,144 @@ CONFIG_TSPP=y
 #
 # Media ancillary drivers (tuners, sensors, i2c, spi, frontends)
 #
-CONFIG_MEDIA_SUBDRV_AUTOSELECT=y
+# CONFIG_MEDIA_SUBDRV_AUTOSELECT is not set
+
+#
+# I2C Encoders, decoders, sensors and other helper chips
+#
 
 #
 # Audio decoders, processors and mixers
 #
+# CONFIG_VIDEO_TVAUDIO is not set
+# CONFIG_VIDEO_TDA7432 is not set
+# CONFIG_VIDEO_TDA9840 is not set
+# CONFIG_VIDEO_TEA6415C is not set
+# CONFIG_VIDEO_TEA6420 is not set
+# CONFIG_VIDEO_MSP3400 is not set
+# CONFIG_VIDEO_CS3308 is not set
+# CONFIG_VIDEO_CS5345 is not set
+# CONFIG_VIDEO_CS53L32A is not set
+# CONFIG_VIDEO_TLV320AIC23B is not set
+# CONFIG_VIDEO_UDA1342 is not set
+# CONFIG_VIDEO_WM8775 is not set
+# CONFIG_VIDEO_WM8739 is not set
+# CONFIG_VIDEO_VP27SMPX is not set
+# CONFIG_VIDEO_SONY_BTF_MPX is not set
 
 #
 # RDS decoders
 #
+# CONFIG_VIDEO_SAA6588 is not set
 
 #
 # Video decoders
 #
+# CONFIG_VIDEO_ADV7180 is not set
+# CONFIG_VIDEO_ADV7183 is not set
+# CONFIG_VIDEO_ADV7604 is not set
+# CONFIG_VIDEO_ADV7842 is not set
+# CONFIG_VIDEO_BT819 is not set
+# CONFIG_VIDEO_BT856 is not set
+# CONFIG_VIDEO_BT866 is not set
+# CONFIG_VIDEO_KS0127 is not set
+# CONFIG_VIDEO_ML86V7667 is not set
+# CONFIG_VIDEO_AD5820 is not set
+# CONFIG_VIDEO_SAA7110 is not set
+# CONFIG_VIDEO_SAA711X is not set
+# CONFIG_VIDEO_TC358743 is not set
+# CONFIG_VIDEO_TVP514X is not set
+# CONFIG_VIDEO_TVP5150 is not set
+# CONFIG_VIDEO_TVP7002 is not set
+# CONFIG_VIDEO_TW2804 is not set
+# CONFIG_VIDEO_TW9903 is not set
+# CONFIG_VIDEO_TW9906 is not set
+# CONFIG_VIDEO_VPX3220 is not set
 
 #
 # Video and audio decoders
 #
+# CONFIG_VIDEO_SAA717X is not set
+# CONFIG_VIDEO_CX25840 is not set
 
 #
 # Video encoders
 #
+# CONFIG_VIDEO_SAA7127 is not set
+# CONFIG_VIDEO_SAA7185 is not set
+# CONFIG_VIDEO_ADV7170 is not set
+# CONFIG_VIDEO_ADV7175 is not set
+# CONFIG_VIDEO_ADV7343 is not set
+# CONFIG_VIDEO_ADV7393 is not set
+# CONFIG_VIDEO_ADV7511 is not set
+# CONFIG_VIDEO_AD9389B is not set
+# CONFIG_VIDEO_AK881X is not set
+# CONFIG_VIDEO_THS8200 is not set
 
 #
 # Camera sensor devices
 #
+# CONFIG_VIDEO_OV2659 is not set
+# CONFIG_VIDEO_OV7640 is not set
+# CONFIG_VIDEO_OV7670 is not set
+# CONFIG_VIDEO_OV9650 is not set
+# CONFIG_VIDEO_VS6624 is not set
+# CONFIG_VIDEO_MT9M032 is not set
+# CONFIG_VIDEO_MT9M111 is not set
+# CONFIG_VIDEO_MT9P031 is not set
+# CONFIG_VIDEO_MT9T001 is not set
+# CONFIG_VIDEO_MT9V011 is not set
+# CONFIG_VIDEO_MT9V032 is not set
+# CONFIG_VIDEO_SR030PC30 is not set
+# CONFIG_VIDEO_NOON010PC30 is not set
+# CONFIG_VIDEO_M5MOLS is not set
+# CONFIG_VIDEO_S5K6AA is not set
+# CONFIG_VIDEO_S5K6A3 is not set
+# CONFIG_VIDEO_S5K4ECGX is not set
+# CONFIG_VIDEO_S5K5BAF is not set
+# CONFIG_VIDEO_SMIAPP is not set
+# CONFIG_VIDEO_S5C73M3 is not set
 
 #
 # Flash devices
 #
+# CONFIG_VIDEO_ADP1653 is not set
+# CONFIG_VIDEO_AS3645A is not set
+# CONFIG_VIDEO_LM3560 is not set
+# CONFIG_VIDEO_LM3646 is not set
 
 #
 # Video improvement chips
 #
+# CONFIG_VIDEO_UPD64031A is not set
+# CONFIG_VIDEO_UPD64083 is not set
 
 #
 # Audio/Video compression chips
 #
+# CONFIG_VIDEO_SAA6752HS is not set
 
 #
 # Miscellaneous helper chips
 #
+# CONFIG_VIDEO_THS7303 is not set
+# CONFIG_VIDEO_M52790 is not set
 
 #
 # Sensors used on soc_camera driver
 #
-# CONFIG_MEDIA_TUNER is not set
-#
-# Multistandard (satellite) frontends
-#
 
 #
-# Multistandard (cable + terrestrial) frontends
+# SPI helper chips
 #
+# CONFIG_VIDEO_GS1662 is not set
 
 #
-# DVB-S (satellite) frontends
+# Customise DVB Frontends
 #
-
-#
-# DVB-T (terrestrial) frontends
-#
-# CONFIG_DVB_AS102_FE is not set
-# CONFIG_DVB_GP8PSK_FE is not set
-
-#
-# DVB-C (cable) frontends
-#
-
-#
-# ATSC (North American/Korean Terrestrial/Cable DTV) frontends
-#
-
-#
-# ISDB-T (terrestrial) frontends
-#
-
-#
-# ISDB-S (satellite) & ISDB-T (terrestrial) frontends
-#
-
-#
-# Digital terrestrial only tuners/PLL
-#
-
-#
-# SEC control devices for DVB-S
-#
+# CONFIG_DVB_AU8522_V4L is not set
+# CONFIG_DVB_TUNER_DIB0070 is not set
+# CONFIG_DVB_TUNER_DIB0090 is not set
 
 #
 # Tools to develop new frontends
@@ -4168,9 +4214,7 @@ CONFIG_STAGING=y
 #
 CONFIG_ASHMEM=y
 # CONFIG_ANDROID_LOW_MEMORY_KILLER is not set
-# CONFIG_ANDROID_LOW_MEMORY_KILLER_AUTODETECT_OOM_ADJ_VALUES is not set
 # CONFIG_ANDROID_VSOC is not set
-# CONFIG_ANDROID_LMK_NOTIFY_TRIGGER is not set
 CONFIG_ION=y
 # CONFIG_ION_TEST is not set
 # CONFIG_ION_DUMMY is not set
@@ -4185,9 +4229,7 @@ CONFIG_ION_MSM=y
 # CONFIG_WILC1000_SPI is not set
 # CONFIG_MOST is not set
 # CONFIG_GREYBUS is not set
-CONFIG_ANDROID_SIMPLE_LMK=y
-CONFIG_ANDROID_SIMPLE_LMK_MINFREE=256
-CONFIG_ANDROID_SIMPLE_LMK_TIMEOUT_MSEC=100
+
 #
 # Qualcomm Atheros CLD WLAN module
 #
@@ -4816,6 +4858,9 @@ CONFIG_ANDROID=y
 CONFIG_ANDROID_BINDER_IPC=y
 CONFIG_ANDROID_BINDER_DEVICES="binder,hwbinder,vndbinder"
 # CONFIG_ANDROID_BINDER_IPC_SELFTEST is not set
+CONFIG_ANDROID_SIMPLE_LMK=y
+CONFIG_ANDROID_SIMPLE_LMK_MINFREE=256
+CONFIG_ANDROID_SIMPLE_LMK_TIMEOUT_MSEC=100
 # CONFIG_LIBNVDIMM is not set
 # CONFIG_NVMEM is not set
 CONFIG_STM=y
@@ -4823,6 +4868,8 @@ CONFIG_STM=y
 # CONFIG_STM_SOURCE_CONSOLE is not set
 # CONFIG_STM_SOURCE_HEARTBEAT is not set
 # CONFIG_INTEL_TH is not set
+CONFIG_CORESIGHT_PLACEHOLDER=y
+CONFIG_CORESIGHT_AMBA_PLACEHOLDER=y
 
 #
 # FPGA Configuration Support
