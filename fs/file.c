@@ -597,7 +597,7 @@ void fd_show_open_files(pid_t pid, struct files_struct *files,
 		lentry = list_entry((&fd_listhead)->next, struct over_fd_entry,
 					fd_link);
 		num_of_entry = lentry->num_of_fd;
-		if (lentry != NULL && lentry->name != NULL)
+		if (!lentry && !lentry->name)
 			pr_info("[FD_LEAK] FDERROR (PID:%d fName:%s Num:%d)\n",
 					pid, lentry->name, num_of_entry);
 		else
