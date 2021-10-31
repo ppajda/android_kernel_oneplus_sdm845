@@ -3104,7 +3104,6 @@ CONFIG_TSPP=y
 #
 # Sensors used on soc_camera driver
 #
-
 #
 # SPI helper chips
 #
@@ -4880,8 +4879,8 @@ CONFIG_OPCHAIN=y
 # CONFIG_CRPL_HELPER is not set
 CONFIG_ADJ_CHAIN=y
 CONFIG_HOUSTON=y
-# CONFIG_MEMPLUS is not set
-# CONFIG_SMART_BOOST is not set
+CONFIG_MEMPLUS=y
+CONFIG_SMART_BOOST=y
 # CONFIG_TPD is not set
 # CONFIG_CPUFREQ_BOUNCING is not set
 # CONFIG_OPLUS_FEATURE_SUGOV_TL is not set
